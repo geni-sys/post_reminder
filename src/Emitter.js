@@ -3,6 +3,7 @@ const Emitter = {
 
   /**
    * @param event registre new function in events object
+   * @param callback function to be called
    *
    * @returns function to be called
    */
@@ -12,7 +13,13 @@ const Emitter = {
   },
 
   emit(event, ...args) {
-    Emitter.events[event].push(...args);
+    if (event in Emitter.events === false) {
+      return;
+    }
+
+    Emitter.events[event].map((callback) => {
+      callback(...args);
+    });
   },
 };
 

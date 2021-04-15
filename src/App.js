@@ -3,17 +3,21 @@ import { AppError } from "./AppError.js";
 import { Timer } from "./Timer.js";
 import { Emitter } from "./Emitter.js";
 
+const notify = Notifyer.notify({
+  title: "Hora do post",
+  body: "Crie algum conteúdo para ajudar a comunidade!",
+  icon: "../assets/instagram.png",
+});
+
 const App = {
   async start() {
     try {
-      const time = 25 * 60;
-      Timer.init(0.6 * 60);
       await Notifyer.init();
-      Notifyer.notify({
-        title: "Hora do post",
-        body: "Crie algum conteúdo para ajudar a comunidade!",
-        icon: "../assets/instagram.png",
-      });
+
+      Emitter.on("countdown-start", notify);
+      Emitter.on("countdown-end", Timer.init);
+
+      Timer.init();
     } catch (error) {
       if (error instanceof AppError) {
         return console.warn(error.message);

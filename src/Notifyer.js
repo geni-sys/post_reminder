@@ -17,12 +17,15 @@ const Notifyer = {
    * @param title title of notification
    * @param body body text of notification
    * @param icon image of notification menu
+   *
+   * @return Function to notify user
    */
   notify({ title, body, icon }) {
-    new Notification(title, {
-      body,
-      icon,
-    });
+    return () =>
+      new Notification(title, {
+        body,
+        icon,
+      });
   },
 };
 

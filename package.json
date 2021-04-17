@@ -3,5 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "eliasall3x <elliasallex@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geni-sys/post_reminder.git"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "electron": "^12.0.4"
+  }
 }

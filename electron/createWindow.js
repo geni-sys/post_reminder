@@ -1,4 +1,7 @@
 const { BrowserWindow } = require("electron");
+const { resolve } = require("path");
+
+const filePath = resolve(__dirname, "../", "index.html");
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -9,7 +12,7 @@ const createWindow = () => {
     resizable: false,
     fullscreenable: false,
   });
-  win.loadFile("index.html");
+  win.loadFile(filePath);
 
   return win;
 };

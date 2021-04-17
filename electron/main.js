@@ -1,10 +1,16 @@
 const { app } = require("electron");
 
+const controlWindow = require("./ControlWindow.js");
+
 function App() {
   const win = require("./createWindow.js");
   const tray = require("./Tray.js");
 
-  tray.on("click", () => console.log("clicado"));
+  const { toggle } = controlWindow(win, tray);
+
+  tray.on("click", toggle);
+  win.on("ready-to-show", win.hide);
+  win.on("blur", win.hide);
 }
 
 app.whenReady().then(App);
@@ -15,4 +21,6 @@ app.on("window-all-closed", () => {
   }
 });
 
-// app.dock.hide();
+if (process.platform === "darwin") {
+  app.dock.hide();
+}
